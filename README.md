@@ -5,7 +5,7 @@ This repository houses diverse data analytics projects coded in Python, covering
 This repository showcases a diverse range of data analytics projects coded in Python, covering various techniques from Exploratory Data Analysis (EDA), regression, classification, to random trees. Each project explores different datasets and domains to derive insightful conclusions and predictions for informed decision-making.
 
 ## Table of Contents
-1. [Project 1: Title](#project-1)
+1. Project 1: Boston Housing Pricing Data
 2. [Project 2: Title](#project-2)
 3. [Project 3: Title](#project-3)
 ...and so on.
