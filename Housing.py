@@ -192,8 +192,6 @@ PTRATIO (Pupil-teacher ratio by town):
 
  R2 of linear regression is 0.62os and with Random Forest the R2 is 0.85
  '''
-# Importing necessary libraries for plotting
-import matplotlib.pyplot as plt
 
 # Data for plotting
 features = [item[0] for item in sorted_features_rf_updated]
