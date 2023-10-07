@@ -2,19 +2,19 @@
 This repository houses diverse data analytics projects coded in Python, covering various topics like EDA, regression, classification, or random trees. Projects tackle various datasets and domains, aiming to derive insightful conclusions for informed decision-making. Explore and feel free to share feedback!
 # Python Analytics Portfolio
 
-This repository showcases a diverse range of data analytics projects coded in Python, covering various techniques from Exploratory Data Analysis (EDA), regression, classification, to random trees. Each project explores different datasets and domains to derive insightful conclusions and predictions for informed decision-making.
+This repository showcases a diverse range of data analytics projects coded in Python, covering various techniques from Exploratory Data Analysis (EDA), regression, and classification, to random trees. Each project explores different datasets and domains to derive insightful conclusions and predictions for informed decision-making.
 
 ## Table of Contents
-1. Project 1: Boston Housing Pricing Data
+1. Project 1: Predictive Modeling and Analysis of Boston Housing Prices
 2. [Project 2: Title](#project-2)
 3. [Project 3: Title](#project-3)
 ...and so on.
 
-## [Project 1: Title](link-to-project-1)
-- **Description**: Brief description of the project.
-- **Techniques Used**: EDA, Regression, etc.
-- **Libraries Used**: pandas, scikit-learn, etc.
-- **Datasets**: Description or source of the datasets used.
+Project: Predictive Modeling and Analysis of Boston Housing Prices
+Description: This project aims to predict the median value of owner-occupied homes in Boston using a variety of features such as crime rate, number of rooms, and more. The project includes exploratory data analysis, feature selection, and predictive modeling, culminating in an optimized Random Forest model.
+Techniques Used: Exploratory Data Analysis (EDA), Feature Selection (LASSO), Multiple Linear Regression, Random Forest, Hyperparameter Tuning (Grid Search)
+Libraries Used: pandas, scikit-learn, matplotlib, numpy
+Datasets: The dataset contains 506 samples and 14 features, including the target variable. It comprises various indicators that potentially influence housing prices in Boston, such as crime rate, pupil-teacher ratio, etc.
 
 ## [Project 2: Title](link-to-project-2)
 - **Description**: Brief description of the project.
