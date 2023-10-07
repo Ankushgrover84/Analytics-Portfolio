@@ -6,11 +6,8 @@ This repository showcases a diverse range of data analytics projects coded in Py
 
 ## Table of Contents
 1. Project 1: Predictive Modeling and Analysis of Boston Housing Prices
-2. [Project 2: Title](#project-2)
-3. [Project 3: Title](#project-3)
-...and so on.
 
-Project: Predictive Modeling and Analysis of Boston Housing Prices
+Project 1 : Predictive Modeling and Analysis of Boston Housing Prices
 Description: This project aims to predict the median value of owner-occupied homes in Boston using a variety of features such as crime rate, number of rooms, and more. The project includes exploratory data analysis, feature selection, and predictive modeling, culminating in an optimized Random Forest model.
 Techniques Used: Exploratory Data Analysis (EDA), Feature Selection (LASSO), Multiple Linear Regression, Random Forest, Hyperparameter Tuning (Grid Search)
 Libraries Used: pandas, scikit-learn, matplotlib, numpy
