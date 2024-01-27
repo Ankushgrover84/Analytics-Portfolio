@@ -1,0 +1,143 @@
+# Importing necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Lasso
+from sklearn.model_selection import GridSearchCV
+import numpy as np
+
+# Load the dataset
+housing_data = pd.read_csv('Project2_housing.csv')
+'''
+1)longitude,latitude,
+2)housing_median_age,
+3)total_rooms,
+4)total_bedrooms,
+5)population,
+6)households,
+7)median_income,
+8)median_house_value,
+9)ocean_proximity
+
+'''
+print(housing_data.info())
+
+
+# Summary of the dataset
+data_summary = housing_data.describe()
+
+# Check for missing values
+missing_values = housing_data.isnull().sum()
+
+print(data_summary)
+print(missing_values)
+#Total_bedrooms has 207 null values
+
+# Fill missing values in 'total_bedrooms' with the median
+median_total_bedrooms = housing_data['total_bedrooms'].median()
+housing_data['total_bedrooms'].fillna(median_total_bedrooms, inplace=True)
+
+# One-hot encoding of the 'ocean_proximity' column
+ocean_proximity_encoded = pd.get_dummies(housing_data['ocean_proximity'], prefix='ocean_proximity')
+
+# Adding the encoded columns to the original dataframe
+housing_data_encoded = pd.concat([housing_data, ocean_proximity_encoded], axis=1)
+print(housing_data_encoded.info())
+
+# Dropping the original 'ocean_proximity' column
+housing_data_encoded.drop('ocean_proximity', axis=1, inplace=True)
+
+# Correlation analysis
+correlation_matrix = housing_data_encoded.corr()
+
+# Plotting the correlation matrix as a heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Matrix")
+plt.show()
+
+'''
+median_house_value shows a moderate positive correlation with median_income (0.69). This suggests that as median income increases, the median house value tends to increase as well.
+
+There are positive correlations between total_rooms, total_bedrooms, population, and households. This is expected as these attributes are related to the size of the housing area.
+
+housing_median_age has a slightly negative correlation with total_rooms and total_bedrooms, indicating that older houses tend to have fewer rooms and bedrooms.
+
+'''
+
+# Histograms for key variables
+plt.figure(figsize=(15, 5))
+
+# Histogram for median_income
+plt.subplot(1, 3, 1)
+sns.histplot(housing_data['median_income'], bins=30, kde=True)
+plt.title('Distribution of Median Income')
+
+# Histogram for median_house_value
+plt.subplot(1, 3, 2)
+sns.histplot(housing_data['median_house_value'], bins=30, kde=True)
+plt.title('Distribution of Median House Value')
+
+# Histogram for housing_median_age
+plt.subplot(1, 3, 3)
+sns.histplot(housing_data['housing_median_age'], bins=30, kde=True)
+plt.title('Distribution of Housing Median Age')
+
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(15, 6))
+
+# Scatter plot for median_house_value vs median_income
+plt.subplot(1, 2, 1)
+sns.scatterplot(x='median_income', y='median_house_value', data=housing_data, alpha=0.5)
+plt.title('Median House Value vs. Median Income')
+
+# Scatter plot for median_house_value vs latitude and longitude
+plt.subplot(1, 2, 2)
+sns.scatterplot(x='longitude', y='latitude', data=housing_data, hue='median_house_value',
+                palette='coolwarm', alpha=0.5, legend=False)
+plt.title('Geographic Distribution of Median House Value')
+plt.show()
+
+# Box plot for median_house_value across different ocean_proximity categories
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='ocean_proximity', y='median_house_value', data=housing_data)
+plt.title('Median House Value Across Different Ocean Proximity Categories')
+plt.show()
+
+# Regression model to predict median house value
+# Splitting the data into features (X) and the target variable (y)
+X = housing_data_encoded.drop('median_house_value', axis=1)
+y = housing_data_encoded['median_house_value']
+
+# Splitting the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# applying feature scaling
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# defining and training the Linear Regression model
+linear_reg_model = LinearRegression()
+linear_reg_model.fit(X_train_scaled, y_train)
+
+# Reevaluating the model
+y_pred = linear_reg_model.predict(X_test_scaled)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
+
+print('mse=')
+print(mse)
+print('rmse=')
+print(rmse)
+print('r2=')
+print(r2)
